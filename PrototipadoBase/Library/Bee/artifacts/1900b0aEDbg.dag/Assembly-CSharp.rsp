@@ -354,7 +354,12 @@
 -r:"Library/Bee/artifacts/1900b0aEDbg.dag/Unity.VSCode.Editor.ref.dll"
 -r:"Library/Bee/artifacts/1900b0aEDbg.dag/UnityEditor.UI.ref.dll"
 -r:"Library/Bee/artifacts/1900b0aEDbg.dag/UnityEngine.UI.ref.dll"
+"Assets/Scripts/EnemyBehaviour.cs"
+"Assets/Scripts/EnemySpawner.cs"
 "Assets/Scripts/HeroBehaviour.cs"
+"Assets/Scripts/HeroBullet.cs"
+"Assets/Scripts/HeroCamera.cs"
+"Assets/Scripts/HeroWeapon.cs"
 -langversion:9.0
 
 /deterministic

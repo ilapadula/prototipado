@@ -5,31 +5,55 @@ using UnityEngine;
 public class HeroBehaviour : MonoBehaviour
 {
     public float velocity = 10f;
+    public int healthPoints = 100;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
     void Update()
     {
-        if (Input.GetKey(KeyCode.LeftArrow))
+        var speed = Vector3.zero;
+        if (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A))
         {
-            transform.Translate(transform.right * (-velocity * Time.deltaTime));
+            speed += Vector3.left;
         }
-         if (Input.GetKey(KeyCode.RightArrow))
+        if (Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D))
         {
-            transform.Translate(transform.right * (velocity * Time.deltaTime));
+            speed += Vector3.right;
         }
-         if (Input.GetKey(KeyCode.UpArrow))
+        if (Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.W))
         {
-            transform.Translate(transform.forward * (velocity * Time.deltaTime));
+            speed += Vector3.forward;
         }
-         if (Input.GetKey(KeyCode.DownArrow))
+        if (Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.S))
         {
-            transform.Translate(transform.forward * (-velocity * Time.deltaTime));
+            speed += Vector3.back;
+        }
+
+        if (speed != Vector3.zero)
+        {
+            transform.Translate(speed.normalized * (velocity * Time.deltaTime), Space.World);
+            transform.rotation = Quaternion.LookRotation(speed);
+        }
+
+        if (healthPoints <= 0)
+        {
+            Destroy(gameObject);
+        }
+    }
+
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("Enemy"))
+        {
+            healthPoints--;
+            Debug.Log($"Health points {healthPoints}");
+        }
+    }
+
+    void OnTriggerStay(Collider other)
+    {
+        if (other.gameObject.CompareTag("Enemy"))
+        {
+            healthPoints--;
+            Debug.Log($"Health points {healthPoints}");
         }
     }
 }
