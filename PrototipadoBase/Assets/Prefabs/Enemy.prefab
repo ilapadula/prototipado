@@ -46,7 +46,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hero: {fileID: 0}
-  enemySpeed: 5
+  enemySpeed: 2
 --- !u!1 &6285002368291442948
 GameObject:
   m_ObjectHideFlags: 0

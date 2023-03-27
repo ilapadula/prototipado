@@ -5,16 +5,15 @@ using UnityEngine;
 public class HeroCamera : MonoBehaviour
 {
     public HeroBehaviour hero;
+    private Vector3 heroRelativePosition;
 
-    // Start is called before the first frame update
     void Start()
     {
-        
+        heroRelativePosition = hero.transform.position - transform.position;
     }
 
-    // Update is called once per frame
     void Update()
     {
-        transform.position = hero.transform.position + Vector3.up * 20;
+        transform.position = hero.transform.position - heroRelativePosition;
     }
 }
