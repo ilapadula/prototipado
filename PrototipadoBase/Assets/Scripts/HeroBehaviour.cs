@@ -6,29 +6,36 @@ public class HeroBehaviour : MonoBehaviour
 {
     public float velocity = 10f;
     public int healthPoints = 100;
-
+    public LineRenderer lineRenderer;
+    public Camera camera;
+    
     void Update()
     {
         var speed = Vector3.zero;
-        if (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A))
+        if (Input.GetMouseButtonDown(0))
         {
-            speed += Vector3.left;
+            // Set the start point of the line
+            lineRenderer.SetPosition(0, transform.position);
         }
-        if (Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D))
+        
+        if (Input.GetMouseButton(0))
         {
-            speed += Vector3.right;
+            // Get the current mouse position
+            Vector3 mousePos = camera.ScreenToWorldPoint(Input.mousePosition);;
+        
+            // Set the end point of the line
+            lineRenderer.SetPosition(1, mousePos);
         }
-        if (Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.W))
+
+        if (Input.GetMouseButtonUp(0))
         {
-            speed += Vector3.forward;
-        }
-        if (Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.S))
-        {
-            speed += Vector3.back;
+            lineRenderer.SetPosition(1, transform.position);
+            // aca podriamos calcular la velocidad en funcion de el vector que da la posicion final del mouse (donde hizo mouse up)
         }
 
         if (speed != Vector3.zero)
         {
+            // esto hay que cambiarlo por un sistema que aplique inercia a una velocidad inicial
             transform.Translate(speed.normalized * (velocity * Time.deltaTime), Space.World);
             transform.rotation = Quaternion.LookRotation(speed);
         }
