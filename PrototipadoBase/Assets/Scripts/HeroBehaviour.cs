@@ -4,56 +4,47 @@ using UnityEngine;
 
 public class HeroBehaviour : MonoBehaviour
 {
-    public float velocity = 10f;
-    public int healthPoints = 100;
+    public float maxPower = 50f;
+    public float powerMultiplier = 1f;
 
-    void Update()
+    private Vector3 startPoint;
+    private Vector3 endPoint;
+    private Vector3 direction;
+    private float distance;
+    private float currentPower;
+    private bool isDragging;
+
+    private Rigidbody rb;
+
+    private void Start()
     {
-        var speed = Vector3.zero;
-        if (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A))
-        {
-            speed += Vector3.left;
-        }
-        if (Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D))
-        {
-            speed += Vector3.right;
-        }
-        if (Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.W))
-        {
-            speed += Vector3.forward;
-        }
-        if (Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.S))
-        {
-            speed += Vector3.back;
-        }
-
-        if (speed != Vector3.zero)
-        {
-            transform.Translate(speed.normalized * (velocity * Time.deltaTime), Space.World);
-            transform.rotation = Quaternion.LookRotation(speed);
-        }
-
-        if (healthPoints <= 0)
-        {
-            Destroy(gameObject);
-        }
+        rb = GetComponent<Rigidbody>();
+        startPoint = transform.position;
     }
 
-    void OnTriggerEnter(Collider other)
+    private void Update()
     {
-        if (other.gameObject.CompareTag("Enemy"))
+        if (Input.GetMouseButtonDown(0))
         {
-            healthPoints--;
-            Debug.Log($"Health points {healthPoints}");
+            startPoint = transform.position;
+            isDragging = true;
         }
-    }
 
-    void OnTriggerStay(Collider other)
-    {
-        if (other.gameObject.CompareTag("Enemy"))
+        if (isDragging)
         {
-            healthPoints--;
-            Debug.Log($"Health points {healthPoints}");
+            endPoint = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            endPoint.y = 0;
+            direction = (endPoint - startPoint).normalized;
+            distance = Vector3.Distance(startPoint, endPoint);
+
+            currentPower = Mathf.Clamp(distance * powerMultiplier, 0f, maxPower);
+        }
+
+        if (Input.GetMouseButtonUp(0))
+        {
+            isDragging = false;
+            rb.AddForce(direction * currentPower, ForceMode.Impulse);
+            currentPower = 0f;
         }
     }
 }
