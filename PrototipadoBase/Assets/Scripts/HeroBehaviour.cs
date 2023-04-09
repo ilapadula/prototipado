@@ -25,12 +25,16 @@ public class HeroBehaviour : MonoBehaviour
         
             // Set the end point of the line
             lineRenderer.SetPosition(1, mousePos);
+
+            transform.LookAt(mousePos);
         }
 
         if (Input.GetMouseButtonUp(0))
         {
             lineRenderer.SetPosition(1, transform.position);
             // aca podriamos calcular la velocidad en funcion de el vector que da la posicion final del mouse (donde hizo mouse up)
+            
+            transform.Translate(Vector3.forward * velocity * Time.deltaTime);
         }
 
         if (speed != Vector3.zero)
