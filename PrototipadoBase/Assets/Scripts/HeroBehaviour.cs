@@ -35,6 +35,13 @@ public class HeroBehaviour : MonoBehaviour
             // aca podriamos calcular la velocidad en funcion de el vector que da la posicion final del mouse (donde hizo mouse up)
             
             transform.Translate(Vector3.forward * velocity * Time.deltaTime);
+            if (transform.position.y > 0 || transform.position.y < 0)
+            {
+                transform.position = new Vector3(transform.position.x, 0f, transform.position.z);
+            }
+            
+             
+            
         }
 
         if (speed != Vector3.zero)
