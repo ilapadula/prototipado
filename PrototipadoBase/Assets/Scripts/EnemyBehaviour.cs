@@ -6,6 +6,7 @@ public class EnemyBehaviour : MonoBehaviour
 {
     public HeroBehaviour hero;
     public float enemySpeed = 2.0f;
+    public int health = 100;
 
     // Start is called before the first frame update
     void Start()
@@ -20,5 +21,14 @@ public class EnemyBehaviour : MonoBehaviour
             return;
         var direction = (hero.transform.position - transform.position).normalized;
         transform.Translate(direction * (enemySpeed * Time.deltaTime));
+    }
+
+    public void OnDamaged(int damage)
+    {
+        health -= damage;
+        if(health < 0)
+        {
+            Destroy(gameObject);
+        }
     }
 }

@@ -5,8 +5,9 @@ using UnityEngine;
 public class HeroWeapon : MonoBehaviour
 {
     public HeroBullet bulletPrefab;
-    public float frequency = 1f;
+    public float frequency = 0.3f;
     public float angle = 0f;
+    public int bulletDamage;
 
     private float timer = 0;
 
@@ -16,11 +17,13 @@ public class HeroWeapon : MonoBehaviour
     {
         Debug.DrawRay(transform.position, transform.forward, Color.red, 10f);
         timer += Time.deltaTime;
-        if (timer > frequency)
+        if (Input.GetKey(KeyCode.Mouse0) && timer >= frequency)
         {
             var bulletDirection = Quaternion.LookRotation(transform.forward) * Quaternion.AngleAxis(angle, Vector3.up);
             var bullet = Instantiate(bulletPrefab, transform.position, bulletDirection);
             timer = 0;
+            bullet.damage = bulletDamage;
         }
+
     }
 }

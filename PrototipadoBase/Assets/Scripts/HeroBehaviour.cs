@@ -6,6 +6,7 @@ public class HeroBehaviour : MonoBehaviour
 {
     public float velocity = 10f;
     public int healthPoints = 100;
+    public Vector3 mousePosition;
 
     void Update()
     {
@@ -30,13 +31,23 @@ public class HeroBehaviour : MonoBehaviour
         if (speed != Vector3.zero)
         {
             transform.Translate(speed.normalized * (velocity * Time.deltaTime), Space.World);
-            transform.rotation = Quaternion.LookRotation(speed);
+            
         }
+        transform.rotation = Quaternion.LookRotation(mousePosition - transform.position);
 
         if (healthPoints <= 0)
         {
             Destroy(gameObject);
         }
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        RaycastHit hit;
+        if (Physics.Raycast(ray, out hit, Mathf.Infinity,LayerMask.GetMask("Plane")))
+        {
+            mousePosition = hit.point;
+            
+        }
+       
+
     }
 
     void OnTriggerEnter(Collider other)

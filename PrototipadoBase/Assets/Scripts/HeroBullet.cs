@@ -4,6 +4,7 @@ public class HeroBullet : MonoBehaviour
 {
     public float velocity = 30f;
     private Vector3 speed;
+    public int damage;
 
     void Start()
     {
@@ -19,7 +20,8 @@ public class HeroBullet : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Enemy"))
         {
-            Destroy(other.gameObject);
+            other.GetComponent<EnemyBehaviour>().OnDamaged(damage);
+            Destroy(gameObject);
         }
     }
 }
