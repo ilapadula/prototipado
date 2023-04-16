@@ -41,7 +41,7 @@ public class HeroBehaviour : MonoBehaviour
 
 
             speed = direction * velocity;
-            //Debug.Log($"Speed : {speed}");
+           // Debug.Log($"Speed : {speed}");
 
 
         }
@@ -53,11 +53,14 @@ public class HeroBehaviour : MonoBehaviour
             transform.Translate(-speed * Time.deltaTime, Space.World);
             speed *= friction;
             moving = true;
+            Time.timeScale = 1;
         }
 
+        
         if(speed == Vector3.zero)
         {
             moving = false;
+            Time.timeScale = 0.50f;
         }
 
 
