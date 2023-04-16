@@ -26,8 +26,10 @@ public class EnemyBehaviour : MonoBehaviour
     public void OnDamaged(int damage)
     {
         health -= damage;
-        if(health < 0)
+        Debug.Log(damage + ", " + health);
+        if(health <= 0)
         {
+            hero.OnEnemyKilled(gameObject);
             Destroy(gameObject);
         }
     }

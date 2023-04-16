@@ -5,6 +5,7 @@ public class HeroBullet : MonoBehaviour
     public float velocity = 30f;
     private Vector3 speed;
     public int damage;
+    public GameObject enemyHit;
 
     void Start()
     {
@@ -18,10 +19,13 @@ public class HeroBullet : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("Enemy"))
+        if (other.gameObject.CompareTag("Enemy") && other.gameObject != enemyHit)
         {
-            other.GetComponent<EnemyBehaviour>().OnDamaged(damage);
-            Destroy(gameObject);
+            
+            enemyHit = other.gameObject;
+            other.gameObject.GetComponent<EnemyBehaviour>().OnDamaged(damage);
+            Destroy(gameObject,4);
+            
         }
     }
 }

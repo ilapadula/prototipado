@@ -50,6 +50,11 @@ public class HeroBehaviour : MonoBehaviour
 
     }
 
+    public void OnEnemyKilled(GameObject Enemy)
+    {
+        transform.position = Enemy.transform.position;
+    }
+
     void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Enemy"))
