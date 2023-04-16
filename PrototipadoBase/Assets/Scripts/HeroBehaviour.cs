@@ -11,6 +11,7 @@ public class HeroBehaviour : MonoBehaviour
     public float friction = 0.95f;
     private Vector3 speed;
     private Vector3 direction;
+    public bool moving;
 
     void Update()
     {
@@ -19,7 +20,7 @@ public class HeroBehaviour : MonoBehaviour
             // Set the start point of the line
             lineRenderer.SetPosition(0, transform.position);
         }
-
+        
         if (Input.GetMouseButton(0))
         {
             // Get the current mouse position
@@ -40,7 +41,7 @@ public class HeroBehaviour : MonoBehaviour
 
 
             speed = direction * velocity;
-            Debug.Log($"Speed : {speed}");
+            //Debug.Log($"Speed : {speed}");
 
 
         }
@@ -51,7 +52,12 @@ public class HeroBehaviour : MonoBehaviour
 
             transform.Translate(-speed * Time.deltaTime, Space.World);
             speed *= friction;
+            moving = true;
+        }
 
+        if(speed == Vector3.zero)
+        {
+            moving = false;
         }
 
 
@@ -65,17 +71,25 @@ public class HeroBehaviour : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Enemy"))
         {
-            healthPoints--;
-            Debug.Log($"Health points {healthPoints}");
+            if (moving)
+            {
+                Destroy(other.gameObject);
+            }
+            else
+            {
+                healthPoints--;
+                //Debug.Log($"Health points {healthPoints}");
+            }
+           
         }
     }
 
-    void OnTriggerStay(Collider other)
-    {
-        if (other.gameObject.CompareTag("Enemy"))
-        {
-            healthPoints--;
-            Debug.Log($"Health points {healthPoints}");
-        }
-    }
+    //void OnTriggerStay(Collider other)
+    //{
+    //    if (other.gameObject.CompareTag("Enemy"))
+    //    {
+    //        healthPoints--;
+    //        Debug.Log($"Health points {healthPoints}");
+    //    }
+    //}
 }
