@@ -412,10 +412,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyPrefab: {fileID: 6285002367368690650, guid: 1269500be774f184f8e3d14ed01a7bcc, type: 3}
   hero: {fileID: 2036419127}
-  initialSpawn: 10
+  initialSpawn: 1
   spawnInterval: 1
-  minSpawn: 2
-  maxSpawn: 6
+  minSpawn: 1
+  maxSpawn: 1
 --- !u!4 &1456073434
 Transform:
   m_ObjectHideFlags: 0
