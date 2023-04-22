@@ -8,13 +8,17 @@ public class HeroBehaviour : MonoBehaviour
     public int healthPoints = 100;
     public LineRenderer lineRenderer;
     public Camera camera;
-    public float friction = 0.95f;
+    public float friction = 0.1f;
     private Vector3 speed;
     private Vector3 direction;
     public bool moving;
+    public float minTimeScale = 0.05f;
+    public float sensitivity = 0.1f;
 
     void Update()
     {
+        
+
         if (Input.GetMouseButtonDown(0))
         {
             // Set the start point of the line
@@ -46,30 +50,30 @@ public class HeroBehaviour : MonoBehaviour
 
         }
 
-        if (speed != Vector3.zero)
-        {
+
+    
             // esto hay que cambiarlo por un sistema que aplique inercia a una velocidad inicial
 
             transform.Translate(-speed * Time.deltaTime, Space.World);
-            speed *= friction;
+            Time.timeScale = Mathf.Clamp01(minTimeScale + speed.magnitude * sensitivity);
+            Debug.Log($"TimeScale {Time.timeScale}");
+            
+            //Apply Friction smoothly using Lerp
+            speed.x = Mathf.Lerp(speed.x, 0, friction);
+            speed.y = Mathf.Lerp(speed.y, 0, friction);
+            speed.z = Mathf.Lerp(speed.z, 0, friction);
             moving = true;
-            Time.timeScale = 1;
-        }
+            //Time.timeScale = 1;
+        
+
 
         
-        if(speed == Vector3.zero)
-        {
-            moving = false;
-            Time.timeScale = 0.50f;
-        }
-
-
         if (healthPoints <= 0)
         {
             Destroy(gameObject);
         }
     }
-
+    
     void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Enemy"))
@@ -96,3 +100,4 @@ public class HeroBehaviour : MonoBehaviour
     //    }
     //}
 }
+
