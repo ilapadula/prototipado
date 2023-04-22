@@ -18,7 +18,20 @@ public class EnemyBehaviour : MonoBehaviour
     {
         if (hero == null)
             return;
+        transform.LookAt(hero.transform);
         var direction = (hero.transform.position - transform.position).normalized;
         transform.Translate(direction * (enemySpeed * Time.deltaTime));
+    }
+
+    
+     void OnTriggerEnter(Collider other)
+    {
+        //Death on collition with player
+        if (other.gameObject.CompareTag("Hero"))
+        {
+            Destroy(gameObject);
+        }
+
+    
     }
 }

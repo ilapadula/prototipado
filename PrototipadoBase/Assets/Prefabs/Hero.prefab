@@ -95,7 +95,6 @@ GameObject:
   - component: {fileID: 2808352723358654013}
   - component: {fileID: 2808352723358654003}
   - component: {fileID: 2808352723358654000}
-  - component: {fileID: 2036419131}
   m_Layer: 0
   m_Name: Hero
   m_TagString: Untagged
@@ -133,6 +132,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   velocity: 10
   healthPoints: 100000
+  lineRenderer: {fileID: 0}
+  camera: {fileID: 0}
+  friction: 0.95
+  moving: 0
+  minTimeScale: 0.05
+  sensitivity: 0.8
 --- !u!136 &2808352723358654003
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -163,18 +168,3 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 84
   m_CollisionDetection: 0
---- !u!114 &2036419131
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2808352723358654012}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 77849437a6d789b459873d2ec1a4f1be, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  bulletPrefab: {fileID: -6680291490804821621, guid: 29eee67472f8b61489910d9e82d43d90, type: 3}
-  frequency: 1
-  angle: 0

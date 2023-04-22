@@ -56,14 +56,12 @@ public class HeroBehaviour : MonoBehaviour
 
             transform.Translate(-speed * Time.deltaTime, Space.World);
             Time.timeScale = Mathf.Clamp01(minTimeScale + speed.magnitude * sensitivity);
-            Debug.Log($"TimeScale {Time.timeScale}");
             
             //Apply Friction smoothly using Lerp
             speed.x = Mathf.Lerp(speed.x, 0, friction);
             speed.y = Mathf.Lerp(speed.y, 0, friction);
             speed.z = Mathf.Lerp(speed.z, 0, friction);
             moving = true;
-            //Time.timeScale = 1;
         
 
 
@@ -76,28 +74,16 @@ public class HeroBehaviour : MonoBehaviour
     
     void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("Enemy"))
+        if (other.gameObject.CompareTag("Bullet"))
         {
-            if (moving)
-            {
-                Destroy(other.gameObject);
-            }
-            else
-            {
-                healthPoints--;
-                //Debug.Log($"Health points {healthPoints}");
-            }
-           
+            healthPoints -= 10;
+            Debug.Log($"Health points {healthPoints}");
+        }
+         if (other.gameObject.CompareTag("Enemy"))
+        {
+            Destroy(other.gameObject);
         }
     }
 
-    //void OnTriggerStay(Collider other)
-    //{
-    //    if (other.gameObject.CompareTag("Enemy"))
-    //    {
-    //        healthPoints--;
-    //        Debug.Log($"Health points {healthPoints}");
-    //    }
-    //}
 }
 

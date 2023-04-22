@@ -10,6 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 6285002367368690651}
   - component: {fileID: 6285002367368690650}
+  - component: {fileID: -2453139406011455611}
+  - component: {fileID: 7153533750519560302}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Enemy
@@ -45,8 +47,37 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0a350493a2e9a04ea42d4f2b7d9e97d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hero: {fileID: 0}
+  hero: {fileID: 2808352723358654013, guid: cbecf17005960444bb2754820dfdcf51, type: 3}
   enemySpeed: 2
+--- !u!114 &-2453139406011455611
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6285002367368690644}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 77849437a6d789b459873d2ec1a4f1be, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bulletPrefab: {fileID: -6680291490804821621, guid: 29eee67472f8b61489910d9e82d43d90, type: 3}
+  frequency: 5
+  angle: 0
+--- !u!136 &7153533750519560302
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6285002367368690644}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.5
+  m_Height: 1.9773787
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.8851095, z: 0}
 --- !u!1 &6285002368291442948
 GameObject:
   m_ObjectHideFlags: 0
@@ -59,6 +90,7 @@ GameObject:
   - component: {fileID: 6285002368291442952}
   - component: {fileID: 6285002368291442953}
   - component: {fileID: 6285002368291442959}
+  - component: {fileID: 4662341364329641753}
   m_Layer: 0
   m_Name: Capsule
   m_TagString: Enemy
@@ -141,7 +173,23 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_Enabled: 1
-  m_Radius: 0.5
-  m_Height: 1.79
+  m_Radius: 0.5067892
+  m_Height: 2.0013537
   m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: 0.0067892075, y: -0.010228425, z: 0}
+--- !u!54 &4662341364329641753
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6285002368291442948}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
