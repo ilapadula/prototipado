@@ -18,6 +18,9 @@ public class HeroBehaviour : MonoBehaviour
     public float score;
     public Text scoreText;
     public Text healthText;
+    public AudioSource source;
+    public AudioClip clip;
+    public AudioClip clip2;
 
 
     void Update()
@@ -50,9 +53,9 @@ public class HeroBehaviour : MonoBehaviour
 
 
             speed = direction * velocity;
-           // Debug.Log($"Speed : {speed}");
+            // Debug.Log($"Speed : {speed}");
 
-
+            source.PlayOneShot(clip);
         }
 
 
@@ -62,6 +65,7 @@ public class HeroBehaviour : MonoBehaviour
         
             transform.Translate(-speed * Time.deltaTime, Space.World);
             Time.timeScale = Mathf.Clamp01(minTimeScale + speed.magnitude * sensitivity);
+            
             
             //Apply Friction smoothly using Lerp
             speed.x = Mathf.Lerp(speed.x, 0, friction);
@@ -93,6 +97,7 @@ public class HeroBehaviour : MonoBehaviour
             Destroy(other.gameObject);
             score += 10;
             scoreText.text = "Score: " + score.ToString();
+            source.PlayOneShot(clip2);
         }
         if (other.gameObject.CompareTag("Wall"))
         {
