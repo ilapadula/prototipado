@@ -14,10 +14,11 @@ public class HeroBehaviour : MonoBehaviour
     public bool moving;
     public float minTimeScale = 0.05f;
     public float sensitivity = 0.1f;
+    
 
     void Update()
     {
-        
+         
 
         if (Input.GetMouseButtonDown(0))
         {
@@ -51,9 +52,10 @@ public class HeroBehaviour : MonoBehaviour
         }
 
 
-    
-            // esto hay que cambiarlo por un sistema que aplique inercia a una velocidad inicial
 
+        // esto hay que cambiarlo por un sistema que aplique inercia a una velocidad inicial
+
+        
             transform.Translate(-speed * Time.deltaTime, Space.World);
             Time.timeScale = Mathf.Clamp01(minTimeScale + speed.magnitude * sensitivity);
             
@@ -70,6 +72,7 @@ public class HeroBehaviour : MonoBehaviour
         {
             Destroy(gameObject);
         }
+       
     }
     
     void OnTriggerEnter(Collider other)
@@ -79,10 +82,15 @@ public class HeroBehaviour : MonoBehaviour
             healthPoints -= 10;
             Debug.Log($"Health points {healthPoints}");
         }
-         if (other.gameObject.CompareTag("Enemy"))
+        if (other.gameObject.CompareTag("Enemy"))
         {
             Destroy(other.gameObject);
         }
+        if (other.gameObject.CompareTag("Wall"))
+        {
+            speed = Vector3.zero;
+        }
+        
     }
 
 }

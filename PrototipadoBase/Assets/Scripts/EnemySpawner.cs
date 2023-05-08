@@ -26,8 +26,9 @@ public class EnemySpawner : MonoBehaviour
 
         for (int i = 0; i < spawnCount; i++)
         {
-            var randomPosition = new Vector3(UnityEngine.Random.Range(-20, 20), 0, UnityEngine.Random.Range(-20, 20));
-            var enemy = Instantiate(enemyPrefab, hero.transform.position + randomPosition, Quaternion.identity);
+           // var randomPosition = new Vector3(UnityEngine.Random.Range(-20, 20), 0, UnityEngine.Random.Range(-20, 20));
+            var randomPosition = new Vector3(UnityEngine.Random.Range(-17, 16), 0, UnityEngine.Random.Range(-4, 28));
+            var enemy = Instantiate(enemyPrefab, randomPosition, Quaternion.identity);
             enemy.hero = hero;
             enemy.enemySpeed *= UnityEngine.Random.Range(0.7f, 1.3f);
         }
