@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class HeroBehaviour : MonoBehaviour
 {
@@ -14,12 +15,15 @@ public class HeroBehaviour : MonoBehaviour
     public bool moving;
     public float minTimeScale = 0.05f;
     public float sensitivity = 0.1f;
-    
+    public float score;
+    public Text scoreText;
+    public Text healthText;
+
 
     void Update()
     {
-         
 
+        healthText.text = "Health: " + healthPoints.ToString();
         if (Input.GetMouseButtonDown(0))
         {
             // Set the start point of the line
@@ -71,20 +75,24 @@ public class HeroBehaviour : MonoBehaviour
         if (healthPoints <= 0)
         {
             Destroy(gameObject);
+            
         }
        
     }
     
-    void OnTriggerEnter(Collider other)
+    void OnCollisionEnter(Collision other)
     {
         if (other.gameObject.CompareTag("Bullet"))
         {
             healthPoints -= 10;
+            healthText.text = "Health: " + healthPoints.ToString();
             Debug.Log($"Health points {healthPoints}");
         }
         if (other.gameObject.CompareTag("Enemy"))
         {
             Destroy(other.gameObject);
+            score += 10;
+            scoreText.text = "Score: " + score.ToString();
         }
         if (other.gameObject.CompareTag("Wall"))
         {
