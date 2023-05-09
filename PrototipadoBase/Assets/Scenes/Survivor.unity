@@ -710,7 +710,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 2d85334c53c45504c9a95ddfb1c92857, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.243
+  m_Volume: 0.032
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -1373,6 +1373,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1184425032}
     - target: {fileID: 2808352723358654013, guid: cbecf17005960444bb2754820dfdcf51, type: 3}
+      propertyPath: slowmo
+      value: 
+      objectReference: {fileID: 8300000, guid: 05f3889bc0dbdd74ebff0a06b0a643fb, type: 3}
+    - target: {fileID: 2808352723358654013, guid: cbecf17005960444bb2754820dfdcf51, type: 3}
       propertyPath: source
       value: 
       objectReference: {fileID: 2808352724010816528}
@@ -1385,6 +1389,10 @@ PrefabInstance:
       value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 2808352723358654013, guid: cbecf17005960444bb2754820dfdcf51, type: 3}
+      propertyPath: explosion
+      value: 
+      objectReference: {fileID: 8300000, guid: b4c8ed7e7d8af1741864666b02af5b8a, type: 3}
+    - target: {fileID: 2808352723358654013, guid: cbecf17005960444bb2754820dfdcf51, type: 3}
       propertyPath: scoreText
       value: 
       objectReference: {fileID: 2044066874}
@@ -1393,12 +1401,16 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1318572137}
     - target: {fileID: 2808352723358654013, guid: cbecf17005960444bb2754820dfdcf51, type: 3}
+      propertyPath: movimiento
+      value: 
+      objectReference: {fileID: 8300000, guid: 4be68c0f7cc47934c8f01d1a818ce72d, type: 3}
+    - target: {fileID: 2808352723358654013, guid: cbecf17005960444bb2754820dfdcf51, type: 3}
       propertyPath: sensitivity
       value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 2808352723358654013, guid: cbecf17005960444bb2754820dfdcf51, type: 3}
       propertyPath: healthPoints
-      value: 10
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 2808352723358654013, guid: cbecf17005960444bb2754820dfdcf51, type: 3}
       propertyPath: lineRenderer

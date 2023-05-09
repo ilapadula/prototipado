@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class HeroBehaviour : MonoBehaviour
 {
@@ -19,8 +20,9 @@ public class HeroBehaviour : MonoBehaviour
     public Text scoreText;
     public Text healthText;
     public AudioSource source;
-    public AudioClip clip;
-    public AudioClip clip2;
+    public AudioClip explosion;
+    public AudioClip movimiento;
+    public AudioClip slowmo;
 
 
     void Update()
@@ -31,6 +33,9 @@ public class HeroBehaviour : MonoBehaviour
         {
             // Set the start point of the line
             lineRenderer.SetPosition(0, transform.position);
+            source.clip = slowmo;
+            source.loop = true;
+            source.Play();
         }
         
         if (Input.GetMouseButton(0))
@@ -55,7 +60,8 @@ public class HeroBehaviour : MonoBehaviour
             speed = direction * velocity;
             // Debug.Log($"Speed : {speed}");
 
-            source.PlayOneShot(clip);
+            source.PlayOneShot(movimiento);
+            source.Stop();
         }
 
 
@@ -79,7 +85,7 @@ public class HeroBehaviour : MonoBehaviour
         if (healthPoints <= 0)
         {
             Destroy(gameObject);
-            
+            SceneManager.LoadScene(0);
         }
        
     }
@@ -97,7 +103,7 @@ public class HeroBehaviour : MonoBehaviour
             Destroy(other.gameObject);
             score += 10;
             scoreText.text = "Score: " + score.ToString();
-            source.PlayOneShot(clip2);
+            source.PlayOneShot(explosion);
         }
         if (other.gameObject.CompareTag("Wall"))
         {
